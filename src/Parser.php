@@ -216,6 +216,16 @@ class Parser
 
     private function _processSpaces() {
         $this->_openXml = preg_replace("/(&nbsp;)/mi", " ", $this->_openXml);
+        $this->_openXml = preg_replace_callback(
+            '/<w:t.*?>(.*?)<\/w:t>/s',
+            function ($matches) {
+                $text = $matches[1];
+                /* Only remove leading and trailing spaces if they are not intentional. */
+                $text = preg_replace('/^\s+/', '', $text); // führende entfernen
+                return "<w:t>{$text}</w:t>";
+            },
+            $this->_openXml
+        );
         $this->_openXml = preg_replace("/(<w:t>)/mi", "<w:t xml:space='preserve'>", $this->_openXml);
 
         $this->_openXml = $this->minifyHtml($this->_openXml);
