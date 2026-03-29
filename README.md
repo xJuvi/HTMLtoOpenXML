@@ -10,7 +10,7 @@ This is the very first version. I coded this because i wanted to put text from a
 INSTALLATION
 ============
 
-`composer require rkorebrits/htmltoopenxml`
+`composer require xjuvi/htmltoopenxml`
 
 WHAT H2OXML CAN DO
 ==================
